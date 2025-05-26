@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://cky1plcn1p65h"]
+
+[ext_resource type="PackedScene" uid="uid://ymeutlagiwnb" path="res://scenes/player.tscn" id="1_6ivci"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_osokm"]
+
+[node name="Sandbox" type="Node"]
+
+[node name="WorldBoundary" type="StaticBody2D" parent="."]
+position = Vector2(556, 483)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary"]
+shape = SubResource("WorldBoundaryShape2D_osokm")
+
+[node name="Player" parent="." instance=ExtResource("1_6ivci")]
+position = Vector2(550, 388)
+
+[node name="WorldBoundary2" type="StaticBody2D" parent="."]
+position = Vector2(3, 400)
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary2"]
+shape = SubResource("WorldBoundaryShape2D_osokm")
+
+[node name="WorldBoundary3" type="StaticBody2D" parent="."]
+position = Vector2(1150, 401)
+rotation = -1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary3"]
+shape = SubResource("WorldBoundaryShape2D_osokm")
