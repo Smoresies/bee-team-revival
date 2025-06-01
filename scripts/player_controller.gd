@@ -87,7 +87,7 @@ func apply_player_dash():
 
 func apply_player_shoot():
 	if Input.is_action_just_pressed("shoot"):
-		print("Shooting!")
+		# print("Shooting!")
 		var instance = bullet.instantiate()
 		
 		instance.position = global_position

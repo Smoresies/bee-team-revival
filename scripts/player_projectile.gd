@@ -5,7 +5,7 @@ extends CharacterBody2D
 var xdir: float = 1
 
 func _ready():
-	print("I'm Alive!")
+	# print("I'm Alive!")
 	pass
 	
 
@@ -15,5 +15,5 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	print("I'm Dead!")
+	# print("I'm Dead!")
 	queue_free()
