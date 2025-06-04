@@ -28,6 +28,12 @@ func _physics_process(delta: float) -> void:
 	apply_player_dash()
 	
 	apply_player_shoot()
+	
+	# Test code for One-Way Platform
+	if Input.is_action_pressed("ui_down"):
+		set_collision_mask_value(5, false)
+	else:
+		set_collision_mask_value(5, true)
 
 	move_and_slide()
 
