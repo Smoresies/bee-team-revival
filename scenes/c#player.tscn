@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://cm30tcfyrnrsi"]
+
+[ext_resource type="Script" uid="uid://bc5v053q0gk8o" path="res://scripts/Character.cs" id="1_y0q7t"]
+[ext_resource type="Script" uid="uid://dclpyh6dpngnf" path="res://scripts/PlayerInputController.cs" id="2_y0q7t"]
+[ext_resource type="Script" uid="uid://c2puhebd3d1aa" path="res://scripts/MovementController.cs" id="3_n0p5k"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y0q7t"]
+
+[node name="Player" type="Node" node_paths=PackedStringArray("_characterInput", "_movementController")]
+script = ExtResource("1_y0q7t")
+_characterInput = NodePath("PlayerInputController")
+_movementController = NodePath("MovementController")
+
+[node name="PlayerInputController" type="Node" parent="."]
+script = ExtResource("2_y0q7t")
+
+[node name="MovementController" type="CharacterBody2D" parent="."]
+collision_mask = 3
+script = ExtResource("3_n0p5k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovementController"]
+shape = SubResource("CapsuleShape2D_y0q7t")

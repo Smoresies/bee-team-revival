@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Scripts
+namespace BeeTeamRevival.scripts
 {
 	/// <summary>
 	/// Provides input for a player character.
@@ -8,15 +8,15 @@ namespace Scripts
 	public partial class PlayerInputController : CharacterInput
 	{
 		[Export]
-		private string JUMP_NAME = "jump";
+		private string _jumpName = "jump";
 		[Export]
-		private string DASH_NAME = "dash";
+		private string _dashName = "dash";
 		[Export]
-		private string ATTACK_NAME = "shoot";
+		private string _attackName = "shoot";
 		[Export]
-		private string LEFT_NAME = "left";
+		private string _leftName = "left";
 		[Export]
-		private string RIGHT_NAME = "right";
+		private string _rightName = "right";
 
 		/// <summary>
 		/// On input attempts to fire actions that need to be invoked as soon as they happen.
@@ -24,20 +24,20 @@ namespace Scripts
 		/// <param name="event">The input event that happened</param>
 		public override void _Input(InputEvent @event)
 		{
-			if (@event.IsActionPressed(JUMP_NAME))
+			if (@event.IsActionPressed(_jumpName))
 			{
 				JumpAction?.Invoke();
-				GD.Print("Jumped");
+				// GD.Print("Jumped");
 			}
-			if (@event.IsActionPressed(DASH_NAME))
+			if (@event.IsActionPressed(_dashName))
 			{
 				DashAction?.Invoke();
-				GD.Print("Dashed");
+				// GD.Print("Dashed");
 			}
-			if (@event.IsActionPressed(ATTACK_NAME))
+			if (@event.IsActionPressed(_attackName))
 			{
 				AttackAction?.Invoke();
-				GD.Print("Attacked");
+				// GD.Print("Attacked");
 			}
 		}
 
@@ -47,9 +47,9 @@ namespace Scripts
 		/// <param name="delta">Change in time since the last call</param>
 		public override void _PhysicsProcess(double delta)
 		{
-			float moveVelocity = Input.GetAxis(LEFT_NAME, RIGHT_NAME);
+			float moveVelocity = Input.GetAxis(_leftName, _rightName);
 			HorizontalMovementAction?.Invoke(moveVelocity, delta);
-			GD.Print("Horizontal Movement: " + moveVelocity + "  Delta:" + delta);
+			// GD.Print("Horizontal Movement: " + moveVelocity + "  Delta:" + delta);
 		}
 	}
 }

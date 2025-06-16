@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cky1plcn1p65h"]
 
-[ext_resource type="PackedScene" uid="uid://ymeutlagiwnb" path="res://scenes/player.tscn" id="1_6ivci"]
 [ext_resource type="PackedScene" uid="uid://d05kywntlvmcm" path="res://scenes/one_way_platform_test.tscn" id="2_h320y"]
+[ext_resource type="PackedScene" uid="uid://cm30tcfyrnrsi" path="res://scenes/c#player.tscn" id="2_xf1sy"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_osokm"]
 
@@ -16,10 +16,6 @@ collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary"]
 shape = SubResource("WorldBoundaryShape2D_osokm")
-
-[node name="Player" parent="." instance=ExtResource("1_6ivci")]
-position = Vector2(550, 388)
-collision_mask = 19
 
 [node name="WorldBoundary2" type="StaticBody2D" parent="."]
 position = Vector2(3, 400)
@@ -51,3 +47,5 @@ shape = SubResource("RectangleShape2D_6ivci")
 [node name="StaticBody2D" parent="." instance=ExtResource("2_h320y")]
 position = Vector2(729, 422)
 scale = Vector2(7.84, 1)
+
+[node name="Player" parent="." instance=ExtResource("2_xf1sy")]

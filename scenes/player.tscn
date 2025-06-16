@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://ymeutlagiwnb"]
+[gd_scene load_steps=3 format=3 uid="uid://ymeutlagiwnb"]
 
 [ext_resource type="Script" uid="uid://dk3yjw3y0r6v1" path="res://scripts/player_controller.gd" id="1_3vyb7"]
-[ext_resource type="Script" uid="uid://dclpyh6dpngnf" path="res://scripts/PlayerInputController.cs" id="2_g2els"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
 
@@ -11,6 +10,3 @@ script = ExtResource("1_3vyb7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_g2els")
-
-[node name="Node" type="Node" parent="."]
-script = ExtResource("2_g2els")
