@@ -14,6 +14,7 @@ namespace BeeTeamRevival.scripts
 		{
 			_characterInput.HorizontalMovementAction += _movementController.MoveHorizontally;
 			_characterInput.JumpAction += _movementController.Jump;
+			_characterInput.DashAction += _movementController.Dash;
         }
 
 	}

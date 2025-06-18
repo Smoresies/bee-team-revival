@@ -22,78 +22,84 @@ namespace BeeTeamRevival.scripts
 
 		private int _currentExtraJump = 0;
 		private Direction _currentDirection = Direction.RIGHT;
+		private bool _canDash = true;
+		private bool _dashing = false;
+		private Timer _dashTimer;
 
 		public override void _PhysicsProcess(double delta)
-		{
-			if (!IsOnFloor())
-			{
-				this.Velocity += GetGravity() * (float) delta;
-			}
-			else
-			{
-				_currentExtraJump = 0;
-			}
-			GD.Print("Vel:" + this.Velocity);
-			MoveAndSlide();
-		}
-
-
-		// Called every frame. 'delta' is the elapsed time since the previous frame.
-		public override void _Process(double delta)
 		{
 			if (IsOnFloor())
 			{
 				_currentExtraJump = 0;
+				_canDash = !_dashing;
 			}
+			else
+			{
+				Velocity += GetGravity() * (float)delta;
+			}
+			MoveAndSlide();
 		}
 
 		public void Jump()
 		{
 			if (IsOnFloor())
 			{
-				Vector2 vector2 = this.Velocity;
-				vector2.Y = _jumpVelocity;
-				this.Velocity = vector2;
+				Velocity = new Vector2(Velocity.X, _jumpVelocity);
 			}
 			else if (_currentExtraJump < _numberOfExtraJumpsAllowed)
 			{
-				Vector2 vector2 = this.Velocity;
-				vector2.Y = _jumpVelocity;
-				this.Velocity = vector2;
+				Velocity = new Vector2(Velocity.X, _jumpVelocity);
 				_currentExtraJump++;
 			}
 		}
 
 		public void MoveHorizontally(float direction, double delta)
 		{
-			if (direction > 0)
+			if (!_dashing)
 			{
-				_currentDirection = Direction.RIGHT;
-			}
-			else if (direction < 0)
-			{
-				_currentDirection = Direction.LEFT;
-			}
-			if (Math.Abs(this.Velocity.X) > _maxSpeed)
-			{
-				int velocityDirection = _currentDirection == Direction.RIGHT ? 1 : -1;
-				Vector2 vector2 = this.Velocity;
-				vector2.X = _maxSpeed * velocityDirection / 2f;
-				this.Velocity = vector2;
 
+				if (direction > 0)
+				{
+					_currentDirection = Direction.RIGHT;
+				}
+				else if (direction < 0)
+				{
+					_currentDirection = Direction.LEFT;
+				}
+				if (Math.Abs(Velocity.X) > _maxSpeed)
+				{
+					Velocity = new Vector2(_maxSpeed * (int)_currentDirection / 2f, Velocity.Y);
+				}
+				else if (Math.Abs(direction) < .00001f)
+				{
+					Velocity = new Vector2(Mathf.Lerp(Velocity.X, 0f, _decelerationTime), Velocity.Y);
+				}
+				else
+				{
+					Velocity = new Vector2(Mathf.MoveToward(Velocity.X, direction * _maxSpeed, _acceleration * (float)delta), Velocity.Y);
+				}
 			}
-			else if (Math.Abs(direction) < .00001f)
+		}
+
+		public void Dash()
+		{
+			if (!_dashing && _canDash)
 			{
-				Vector2 vector2 = this.Velocity;
-				vector2.X = Mathf.Lerp(this.Velocity.X, 0f, _decelerationTime);
-				this.Velocity = vector2;
+				_dashing = true;
+				_canDash = false;
+				Velocity = new Vector2(_dashPower * (int)_currentDirection, 0);
+				_dashTimer = new();
+				_dashTimer.WaitTime = _dashTime;
+				_dashTimer.Autostart = true;
+				_dashTimer.Timeout += ResetDash;
+				AddChild(_dashTimer);
 			}
-			else
-			{
-				Vector2 vector2 = this.Velocity;
-				vector2.X = Mathf.MoveToward(this.Velocity.X, direction * _maxSpeed, _acceleration * (float) delta);
-				this.Velocity = vector2;
-			}
+		}
+
+		public void ResetDash()
+		{
+			_dashing = false;
+			_dashTimer.QueueFree();
 		}
 
 	}

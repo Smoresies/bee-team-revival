@@ -7,16 +7,11 @@ namespace BeeTeamRevival.scripts
 	/// </summary>
 	public partial class PlayerInputController : CharacterInput
 	{
-		[Export]
-		private string _jumpName = "jump";
-		[Export]
-		private string _dashName = "dash";
-		[Export]
-		private string _attackName = "shoot";
-		[Export]
-		private string _leftName = "left";
-		[Export]
-		private string _rightName = "right";
+		private StringName _jumpName = "jump";
+		private StringName _dashName = "dash";
+		private StringName _attackName = "shoot";
+		private StringName _leftName = "left";
+		private StringName _rightName = "right";
 
 		/// <summary>
 		/// On input attempts to fire actions that need to be invoked as soon as they happen.
