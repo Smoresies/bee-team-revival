@@ -9,13 +9,16 @@ namespace BeeTeamRevival.scripts
 		private CharacterInput _characterInput;
 		[Export]
 		private MovementController _movementController;
+		[Export]
+		private Attack _attack;
 
 		public override void _Ready()
 		{
 			_characterInput.HorizontalMovementAction += _movementController.MoveHorizontally;
 			_characterInput.JumpAction += _movementController.Jump;
 			_characterInput.DashAction += _movementController.Dash;
-        }
+			_characterInput.AttackAction += _attack.TryAttack;
+		}
 
 	}
 }

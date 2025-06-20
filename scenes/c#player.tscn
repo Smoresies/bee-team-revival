@@ -1,15 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://cm30tcfyrnrsi"]
+[gd_scene load_steps=8 format=3 uid="uid://cm30tcfyrnrsi"]
 
 [ext_resource type="Script" uid="uid://bc5v053q0gk8o" path="res://scripts/Character.cs" id="1_y0q7t"]
 [ext_resource type="Script" uid="uid://dclpyh6dpngnf" path="res://scripts/PlayerInputController.cs" id="2_y0q7t"]
 [ext_resource type="Script" uid="uid://c2puhebd3d1aa" path="res://scripts/MovementController.cs" id="3_n0p5k"]
+[ext_resource type="Script" uid="uid://dqq8qtnxryljn" path="res://scripts/RangedAttack.cs" id="4_v6ax4"]
+[ext_resource type="PackedScene" uid="uid://bhx6uptakn4s1" path="res://scenes/c#Projectile.tscn" id="5_3arxv"]
+[ext_resource type="Resource" uid="uid://y6ff235molld" path="res://scripts/AttackData.tres" id="6_godjq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y0q7t"]
 
-[node name="Player" type="Node" node_paths=PackedStringArray("_characterInput", "_movementController")]
+[node name="Player" type="Node" node_paths=PackedStringArray("_characterInput", "_movementController", "_attack")]
 script = ExtResource("1_y0q7t")
 _characterInput = NodePath("PlayerInputController")
 _movementController = NodePath("MovementController")
+_attack = NodePath("Attack")
 
 [node name="PlayerInputController" type="Node" parent="."]
 script = ExtResource("2_y0q7t")
@@ -20,3 +24,12 @@ script = ExtResource("3_n0p5k")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MovementController"]
 shape = SubResource("CapsuleShape2D_y0q7t")
+
+[node name="ProjectileSpawnLocation" type="Marker2D" parent="MovementController"]
+position = Vector2(30, 0)
+
+[node name="Attack" type="Node" parent="." node_paths=PackedStringArray("_attackStartLocation")]
+script = ExtResource("4_v6ax4")
+_projectile = ExtResource("5_3arxv")
+_attackData = ExtResource("6_godjq")
+_attackStartLocation = NodePath("../MovementController/ProjectileSpawnLocation")

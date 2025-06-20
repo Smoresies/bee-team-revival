@@ -32,7 +32,7 @@ namespace BeeTeamRevival.scripts
 			if (@event.IsActionPressed(_attackName))
 			{
 				AttackAction?.Invoke();
-				// GD.Print("Attacked");
+				GD.Print("Attacked");
 			}
 		}
 
