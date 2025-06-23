@@ -3,14 +3,21 @@ using System;
 
 namespace BeeTeamRevival.scripts
 {
-	public partial class Character : Node
+	public partial class Character : Node, IStatusable
 	{
 		[Export]
-		private CharacterInput _characterInput;
+		protected CharacterInput _characterInput;
 		[Export]
-		private MovementController _movementController;
+		protected MovementController _movementController;
 		[Export]
-		private Attack _attack;
+		protected HealthAndStatus _healthAndStatus;
+		[Export]
+		protected Attack _attack;
+
+		public HealthAndStatus GetHealthAndStatus()
+		{
+			return _healthAndStatus;
+		}
 
 		public override void _Ready()
 		{
@@ -18,6 +25,12 @@ namespace BeeTeamRevival.scripts
 			_characterInput.JumpAction += _movementController.Jump;
 			_characterInput.DashAction += _movementController.Dash;
 			_characterInput.AttackAction += _attack.TryAttack;
+			_healthAndStatus.OnDeath += OnDeath;
+		}
+
+		private void OnDeath()
+		{
+			QueueFree();
 		}
 
 	}

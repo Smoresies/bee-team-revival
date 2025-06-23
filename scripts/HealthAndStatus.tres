@@ -1,0 +1,7 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://baqv6jf0c1v3v"]
+
+[ext_resource type="Script" uid="uid://ee2l0nfi26bi" path="res://scripts/HealthAndStatus.cs" id="1_8txk5"]
+
+[resource]
+script = ExtResource("1_8txk5")
+_maxHealth = 100

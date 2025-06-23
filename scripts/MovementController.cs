@@ -3,7 +3,7 @@ using System;
 
 namespace BeeTeamRevival.scripts
 {
-	public partial class MovementController : CharacterBody2D
+	public partial class MovementController : CharacterBody2D, IStatusable
 	{
 		[Export]
 		private int _maxSpeed = 200;
@@ -102,5 +102,10 @@ namespace BeeTeamRevival.scripts
 			_dashTimer.QueueFree();
 		}
 
-	}
+		public HealthAndStatus GetHealthAndStatus()
+		{
+			GD.Print("fuck");
+			return null;
+        }
+    }
 }

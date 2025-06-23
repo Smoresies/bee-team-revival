@@ -25,6 +25,12 @@ namespace BeeTeamRevival.scripts
 
 		private void Collide(Node2D node2D) {
 			GD.Print("Collide");
+			if (node2D is IStatusable statusable)
+			{
+				GD.Print("UM");
+				HealthAndStatus healthAndStatus = statusable.GetHealthAndStatus();
+				// healthAndStatus.TakeDamage(_attackData);
+			}
 			QueueFree();
 		}
 	}

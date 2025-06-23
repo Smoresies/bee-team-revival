@@ -2,7 +2,7 @@ using Godot;
 using System;
 namespace BeeTeamRevival.scripts
 {
-    public abstract partial class Attack : Node
+    public abstract partial class Attack : Node 
     {
         [Export]
         protected AttackData _attackData;

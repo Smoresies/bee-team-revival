@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://cm30tcfyrnrsi"]
+[gd_scene load_steps=9 format=3 uid="uid://cm30tcfyrnrsi"]
 
 [ext_resource type="Script" uid="uid://bc5v053q0gk8o" path="res://scripts/Character.cs" id="1_y0q7t"]
+[ext_resource type="Resource" uid="uid://baqv6jf0c1v3v" path="res://scripts/HealthAndStatus.tres" id="2_3arxv"]
 [ext_resource type="Script" uid="uid://dclpyh6dpngnf" path="res://scripts/PlayerInputController.cs" id="2_y0q7t"]
 [ext_resource type="Script" uid="uid://c2puhebd3d1aa" path="res://scripts/MovementController.cs" id="3_n0p5k"]
 [ext_resource type="Script" uid="uid://dqq8qtnxryljn" path="res://scripts/RangedAttack.cs" id="4_v6ax4"]
@@ -13,6 +14,7 @@
 script = ExtResource("1_y0q7t")
 _characterInput = NodePath("PlayerInputController")
 _movementController = NodePath("MovementController")
+_healthAndStatus = ExtResource("2_3arxv")
 _attack = NodePath("Attack")
 
 [node name="PlayerInputController" type="Node" parent="."]
