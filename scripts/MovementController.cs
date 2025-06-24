@@ -3,7 +3,7 @@ using System;
 
 namespace BeeTeamRevival.scripts
 {
-	public partial class MovementController : CharacterBody2D, IStatusable
+	public partial class MovementController : Resource
 	{
 		[Export]
 		private int _maxSpeed = 200;
@@ -26,34 +26,34 @@ namespace BeeTeamRevival.scripts
 		private bool _dashing = false;
 		private Timer _dashTimer;
 
-		public override void _PhysicsProcess(double delta)
+		public void OnPhysicsProcess(Character character, double delta)
 		{
-			if (IsOnFloor())
+			if (character.IsOnFloor())
 			{
 				_currentExtraJump = 0;
 				_canDash = !_dashing;
 			}
 			else
 			{
-				Velocity += GetGravity() * (float)delta;
+				character.Velocity += character.GetGravity() * (float)delta;
 			}
-			MoveAndSlide();
+			character.MoveAndSlide();
 		}
 
-		public void Jump()
+		public void Jump(Character character)
 		{
-			if (IsOnFloor())
+			if (character.IsOnFloor())
 			{
-				Velocity = new Vector2(Velocity.X, _jumpVelocity);
+				character.Velocity = new Vector2(character.Velocity.X, _jumpVelocity);
 			}
 			else if (_currentExtraJump < _numberOfExtraJumpsAllowed)
 			{
-				Velocity = new Vector2(Velocity.X, _jumpVelocity);
+				character.Velocity = new Vector2(character.Velocity.X, _jumpVelocity);
 				_currentExtraJump++;
 			}
 		}
 
-		public void MoveHorizontally(float direction, double delta)
+		public void MoveHorizontally(Character character, float direction, double delta)
 		{
 			if (!_dashing)
 			{
@@ -66,33 +66,33 @@ namespace BeeTeamRevival.scripts
 				{
 					_currentDirection = Direction.LEFT;
 				}
-				if (Math.Abs(Velocity.X) > _maxSpeed)
+				if (Math.Abs(character.Velocity.X) > _maxSpeed)
 				{
-					Velocity = new Vector2(_maxSpeed * (int)_currentDirection / 2f, Velocity.Y);
+					character.Velocity = new Vector2(_maxSpeed * (int)_currentDirection / 2f, character.Velocity.Y);
 				}
 				else if (Math.Abs(direction) < .00001f)
 				{
-					Velocity = new Vector2(Mathf.Lerp(Velocity.X, 0f, _decelerationTime), Velocity.Y);
+					character.Velocity = new Vector2(Mathf.Lerp(character.Velocity.X, 0f, _decelerationTime), character.Velocity.Y);
 				}
 				else
 				{
-					Velocity = new Vector2(Mathf.MoveToward(Velocity.X, direction * _maxSpeed, _acceleration * (float)delta), Velocity.Y);
+					character.Velocity = new Vector2(Mathf.MoveToward(character.Velocity.X, direction * _maxSpeed, _acceleration * (float)delta), character.Velocity.Y);
 				}
 			}
 		}
 
-		public void Dash()
+		public void Dash(Character character)
 		{
 			if (!_dashing && _canDash)
 			{
 				_dashing = true;
 				_canDash = false;
-				Velocity = new Vector2(_dashPower * (int)_currentDirection, 0);
+				character.Velocity = new Vector2(_dashPower * (int)_currentDirection, 0);
 				_dashTimer = new();
 				_dashTimer.WaitTime = _dashTime;
 				_dashTimer.Autostart = true;
 				_dashTimer.Timeout += ResetDash;
-				AddChild(_dashTimer);
+				character.AddChild(_dashTimer);
 			}
 		}
 
@@ -101,11 +101,5 @@ namespace BeeTeamRevival.scripts
 			_dashing = false;
 			_dashTimer.QueueFree();
 		}
-
-		public HealthAndStatus GetHealthAndStatus()
-		{
-			GD.Print("fuck");
-			return null;
-        }
     }
 }

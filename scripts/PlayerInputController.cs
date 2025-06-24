@@ -17,22 +17,22 @@ namespace BeeTeamRevival.scripts
 		/// On input attempts to fire actions that need to be invoked as soon as they happen.
 		/// </summary>
 		/// <param name="event">The input event that happened</param>
-		public override void _Input(InputEvent @event)
+		public override void OnInput(Character character, InputEvent @event)
 		{
 			if (@event.IsActionPressed(_jumpName))
 			{
-				JumpAction?.Invoke();
+				EmitSignal(SignalName.OnJump, character);
 				// GD.Print("Jumped");
 			}
 			if (@event.IsActionPressed(_dashName))
 			{
-				DashAction?.Invoke();
+				EmitSignal(SignalName.OnDash, character);
 				// GD.Print("Dashed");
 			}
 			if (@event.IsActionPressed(_attackName))
 			{
-				AttackAction?.Invoke();
-				GD.Print("Attacked");
+				EmitSignal(SignalName.OnAttack, character);
+				// GD.Print("Attacked");
 			}
 		}
 
@@ -40,10 +40,10 @@ namespace BeeTeamRevival.scripts
 		/// Attempts to fire actions that only need to occur during the physics update.
 		/// </summary>
 		/// <param name="delta">Change in time since the last call</param>
-		public override void _PhysicsProcess(double delta)
+		public override void OnPhysicsProcess(Character character, double delta)
 		{
 			float moveVelocity = Input.GetAxis(_leftName, _rightName);
-			HorizontalMovementAction?.Invoke(moveVelocity, delta);
+			EmitSignal(SignalName.OnHorizontalMovement, character, moveVelocity, delta);
 			// GD.Print("Horizontal Movement: " + moveVelocity + "  Delta:" + delta);
 		}
 	}

@@ -1,0 +1,6 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://ctkqe835t227t"]
+
+[ext_resource type="Script" uid="uid://dclpyh6dpngnf" path="res://scripts/PlayerInputController.cs" id="1_6g486"]
+
+[resource]
+script = ExtResource("1_6g486")

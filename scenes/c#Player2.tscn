@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4w06hesu87g1"]
+
+[ext_resource type="Script" uid="uid://bc5v053q0gk8o" path="res://scripts/Character.cs" id="1_dt0sn"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_himr5"]
+
+[node name="C#player2" type="CharacterBody2D"]
+script = ExtResource("1_dt0sn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_himr5")
+
+[node name="ProjectileSpawnLocation" type="Marker2D" parent="."]
+position = Vector2(30, 0)

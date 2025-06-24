@@ -29,7 +29,7 @@ namespace BeeTeamRevival.scripts
 			{
 				GD.Print("UM");
 				HealthAndStatus healthAndStatus = statusable.GetHealthAndStatus();
-				// healthAndStatus.TakeDamage(_attackData);
+				healthAndStatus.TakeDamage(_attackData);
 			}
 			QueueFree();
 		}

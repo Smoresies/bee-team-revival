@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bpr4ckt46gf0c"]
+
+[ext_resource type="Script" uid="uid://c2puhebd3d1aa" path="res://scripts/MovementController.cs" id="1_vd6n1"]
+
+[resource]
+script = ExtResource("1_vd6n1")
+_maxSpeed = 200
+_jumpVelocity = -300
+_acceleration = 1500
+_dashPower = 2000
+_dashTime = 0.1
+_decelerationTime = 0.1
+_numberOfExtraJumpsAllowed = 1
