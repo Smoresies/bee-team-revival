@@ -1,11 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://b4w06hesu87g1"]
+[gd_scene load_steps=7 format=3 uid="uid://b4w06hesu87g1"]
 
 [ext_resource type="Script" uid="uid://bc5v053q0gk8o" path="res://scripts/Character.cs" id="1_dt0sn"]
+[ext_resource type="Resource" uid="uid://ctkqe835t227t" path="res://scripts/PlayerInputController.tres" id="2_qg62n"]
+[ext_resource type="Resource" uid="uid://bpr4ckt46gf0c" path="res://scripts/MovementController.tres" id="3_21fwn"]
+[ext_resource type="Resource" uid="uid://baqv6jf0c1v3v" path="res://scripts/HealthAndStatus.tres" id="4_m14aw"]
+[ext_resource type="Resource" uid="uid://c570qgxo41soi" path="res://scripts/AttackComponent.tres" id="5_jm46v"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_himr5"]
 
 [node name="C#player2" type="CharacterBody2D"]
+collision_mask = 3
 script = ExtResource("1_dt0sn")
+_characterInput = ExtResource("2_qg62n")
+_movementController = ExtResource("3_21fwn")
+_healthAndStatus = ExtResource("4_m14aw")
+_attackComponent = ExtResource("5_jm46v")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_himr5")

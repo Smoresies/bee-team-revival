@@ -9,6 +9,7 @@ namespace BeeTeamRevival.scripts
 		[Export]
 		private float _projectileSpeed = 10f;
 
+
 		protected override void DoAttack()
 		{
 			Projectile projectile = (Projectile)_projectile.Instantiate();

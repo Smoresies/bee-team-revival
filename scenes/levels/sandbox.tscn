@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cky1plcn1p65h"]
 
 [ext_resource type="PackedScene" uid="uid://d05kywntlvmcm" path="res://scenes/one_way_platform_test.tscn" id="2_h320y"]
-[ext_resource type="PackedScene" uid="uid://cm30tcfyrnrsi" path="res://scenes/c#player.tscn" id="2_xf1sy"]
+[ext_resource type="PackedScene" uid="uid://b4w06hesu87g1" path="res://scenes/c#Player2.tscn" id="2_xf1sy"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_osokm"]
 
@@ -48,4 +48,4 @@ shape = SubResource("RectangleShape2D_6ivci")
 position = Vector2(729, 422)
 scale = Vector2(7.84, 1)
 
-[node name="Player" parent="." instance=ExtResource("2_xf1sy")]
+[node name="C#player2" parent="." instance=ExtResource("2_xf1sy")]
